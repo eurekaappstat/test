@@ -1,5 +1,7 @@
 package com.example.manjunathnb.appstats.database;
 
+import com.example.manjunathnb.appstats.listener.StatSqliteHelper;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -40,12 +42,18 @@ public class DBManager {
     public void getReadableDB() {
         sqlDB =  mStatSqliteHelper.getReadableDatabase();
     }
+    
+    public void beginTransaction() {
+    	sqlDB.beginTransaction();
+    }
+    
+    public void endTransaction() {
+    	sqlDB.endTransaction();
+    }
 
     public long insert(String tableName, ContentValues values) {
-    //    sqlDB.beginTransaction();
         Log.d("manju :DBManager","insert");
         long ret =  sqlDB.insert(tableName, null, values );
-   //     sqlDB.endTransaction();
         return ret;
     }
 
